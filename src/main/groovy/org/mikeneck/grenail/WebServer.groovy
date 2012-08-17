@@ -26,7 +26,8 @@ class WebServer {
     }
 
     static synchronized def start () {
-        webServer = new WebServer(server: new Server(port))
+        def inetAddress = configuration.inetAddress
+        webServer = new WebServer(server: new Server(inetAddress))
     }
 
     static synchronized def stop () {
