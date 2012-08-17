@@ -1,0 +1,35 @@
+apply plugin : 'groovy'
+apply plugin : 'idea'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+group = 'org.mikeneck.grenail'
+archivesBaseName = 'grenail'
+
+repositories {
+	mavenCentral ()
+}
+
+configurations {
+	jettyArtifacts
+}
+
+dependencies {
+	jettyArtifacts 'org.codehaus.groovy:groovy:2.0.0'
+	jettyArtifacts 'javax.servlet:javax.servlet-api:3.0.1'
+	jettyArtifacts ('org.eclipse.jetty:jetty-server:8.1.4.v20120524') {
+		exclude group : 'org.eclipse.jetty.orbit'
+	}
+	groovy files (configurations.jettyArtifacts.files)
+}
+
+idea.project.ipr {
+    withXml { provider ->
+        def map = provider.node.component.find {
+            it.@name == 'VcsDirectoryMappings'
+        }.mapping
+        map.@vcs = 'Git'
+        map.@directory = project.properties.projectDir
+    }
+}
