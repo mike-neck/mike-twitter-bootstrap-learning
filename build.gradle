@@ -22,6 +22,7 @@ dependencies {
 		exclude module : 'javax.servlet'
 	}
     groovy files (configurations.jettyArtifacts.files)
+    testCompile 'junit:junit:4.+'
 }
 
 idea.project.ipr {
