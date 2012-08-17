@@ -16,13 +16,17 @@ configurations {
 }
 
 dependencies {
-    jettyArtifacts 'org.codehaus.groovy:groovy:2.0.0'
+    jettyArtifacts 'org.codehaus.groovy:groovy:1.8.6'
     jettyArtifacts 'javax.servlet:javax.servlet-api:3.0.1'
     jettyArtifacts ('org.eclipse.jetty:jetty-server:8.1.4.v20120524') {
 		exclude module : 'javax.servlet'
 	}
     groovy files (configurations.jettyArtifacts.files)
     testCompile 'junit:junit:4.+'
+    testCompile ('org.spockframework:spock-core:0.6-groovy-1.8') {
+        exclude module : 'junit'
+        exclude module : 'groovy-all'
+    }
 }
 
 idea.project.ipr {
