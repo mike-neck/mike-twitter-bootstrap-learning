@@ -35,4 +35,21 @@ class WebServerSpec extends Specification {
         'root'    |       'product' | 'address' |   'localhost'
         'address' |  '192.168.1.10' | 'port'    |          4400
     }
+
+    def 'configure with Configuration' () {
+        setup :
+        WebServer.configure(new Configuration(port: 3373, root: 'public', address: '192.168.1.1'))
+
+        expect :
+        WebServer."${key}" == value
+
+        cleanup :
+        WebServer.configure(new Configuration(port: 4400, root: '.', address: 'localhost'))
+
+        where :
+        key | value
+        'port' | 3373
+        'root' | 'public'
+        'address' | '192.168.1.1'
+    }
 }

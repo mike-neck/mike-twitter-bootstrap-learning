@@ -21,6 +21,10 @@ class WebServer {
         }
     }
 
+    static def configure (Configuration conf) {
+        configuration = conf
+    }
+
     static synchronized def start () {
         webServer = new WebServer(server: new Server(port))
     }
